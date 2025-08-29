@@ -18,8 +18,13 @@ class Post(models.Model):
 class Comment(models.Model):
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
 
 class Like(models.Model):
     type
 
 
+ost = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments")
+    content = models.TextField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
