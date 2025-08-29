@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
-from .models import User
+from .models import User, Post
+
 
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
@@ -10,4 +11,9 @@ class UserCreateSerializer(BaseUserCreateSerializer):
             'password': {'write_only': True},
         }
 
+
 class PostSerializer(serializers.ModelSerializer):
+    user = UserCreateSerializer(read_only=True)
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'created_at', 'user']
