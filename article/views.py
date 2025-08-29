@@ -2,7 +2,7 @@ from requests import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from rest_fra
+from rest_framework.response import Response
 
 from article.serializers import UserCreateSerializer
 
@@ -16,14 +16,10 @@ def register_user(request):
     if serializer.is_valid():
         user = serializer.save()
         return Response({
-            "message": "Registered succesfully",
-        "user" : {
-            "id": user.id,
-            "username": user.username,
-            "email": user.email,
-        }
-        }
-        )
+            "message": "User created successfully",
+            "user": UserCreateSerializer(user).data
+        } , status=status.HTTP_201_CREATED)
+
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
