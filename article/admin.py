@@ -20,9 +20,12 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'content', 'user', 'post', 'created_at']
+    list_display = ['id', 'reduce_content', 'user', 'post', 'created_at']
 
-    def
+    def reduce_content(self, obj):
+        return obj.content[:30] + '.....' if len(obj.content) > 30 else obj.content
+
+    reduce_content.admin_order_field = 'Content preview'
 
 
 @admin.register(Like)
