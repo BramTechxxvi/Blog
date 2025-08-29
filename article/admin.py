@@ -10,22 +10,24 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'reduce_content', 'created_at', 'updated_at']
+    list_display = ['id', 'title', 'content_preview', 'created_at', 'updated_at']
 
-    def reduce_content(self, obj):
+    def content_preview(self, obj):
         return obj.content[:30] + '.....' if len(obj.content) > 30 else obj.content
 
-    reduce_content.admin_order_field = 'Content preview'
+    content_preview.admin_order_field = 'content'
+    content_preview.short_description = 'Content preview'
 
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'reduce_content', 'user', 'post', 'created_at']
+    list_display = ['id', 'content_preview', 'user', 'post', 'created_at']
 
-    def reduce_content(self, obj):
+    def content_preview(self, obj):
         return obj.content[:30] + '.....' if len(obj.content) > 30 else obj.content
 
-    reduce_content.admin_order_field = 'Content preview'
+    content_preview.admin_order_field = 'content'
+    content_preview.short_description = 'Content preview'
 
 
 @admin.register(Like)
