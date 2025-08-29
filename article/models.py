@@ -26,8 +26,8 @@ class Comment(models.Model):
 
 class Like(models.Model):
     LIKE_CHOICES = [
-        ('like', 'like'),
-        ('love', 'love'),
+        ('like', 'Like'),
+        ('love', 'Love'),
         ('angry', 'Angry'),
         ('sad', 'Sad')
     ]
