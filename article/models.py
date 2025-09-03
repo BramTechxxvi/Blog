@@ -15,6 +15,7 @@ class Post(models.Model):
     content = models.TextField(null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
 
 
