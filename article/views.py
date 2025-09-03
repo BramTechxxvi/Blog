@@ -13,7 +13,7 @@ from article.serializers import UserCreateSerializer
 @permission_classes([AllowAny])
 def register_user(request):
     serializer = UserCreateSerializer(data=request.data)
-    if serializer.is_valid():
+    if serializer.is_valid(raise_exception=True):
         user = serializer.save()
         return Response({
             "message": "User created successfully",
